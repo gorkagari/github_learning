@@ -11,4 +11,4 @@ runs:
   steps:
     - name: Setup Repositories
       shell: bash
-      run: python ./01_repo_setup/python/repo_setup/setup_repositories.py --json_repository_list "${{ inputs.json_repository_list }}"
+      run: python ./01_repo_setup/python/repo_setup/repo_setup.py --json_repository_list "${{ inputs.json_repository_list }}"
