@@ -20,5 +20,4 @@ jobs:
         uses: ./01_repo_setup/python/repo_setup
         with:
           json_repository_list: ${{ env.JSON_REPOSITORY_LIST }}
-        secrets:
           github_token: ${{ secrets.REPO_SETUP_TEST_TOKEN  }}

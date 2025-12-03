@@ -5,7 +5,6 @@ inputs:
     description: 'Path to JSON file containing the list of repositories to set up'
     required: true
     default: './json/repository_list.json'
-secrets:
   github_token:
     description: 'GitHub token for authentication'
     required: true
@@ -16,4 +15,4 @@ runs:
   steps:
     - name: Setup Repositories
       shell: bash
-      run: python ./01_repo_setup/python/repo_setup/repo_setup.py --json_repository_list "${{ inputs.json_repository_list }}" --github_token "${{ secrets.github_token }}"
+      run: python ./01_repo_setup/python/repo_setup/repo_setup.py --json_repository_list "${{ inputs.json_repository_list }}" --github_token "${{ inputs.github_token }}"
