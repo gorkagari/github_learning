@@ -16,16 +16,6 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
-      - name: Troubleshoot
-        shell: bash
-        run: |
-          echo "Current Working Directory:"
-          pwd
-          echo "List Files:"
-          ls -la
-          echo "Python Version:"
-          python --version
-
       - name: Setup Repositories
         uses: ./01_repo_setup/python/repo_setup
         with:
