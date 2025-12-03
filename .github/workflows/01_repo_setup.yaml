@@ -9,7 +9,6 @@ jobs:
   setup_repositories:
     runs-on: ubuntu-latest
     env:
-      REPO_SETUP_ACTION: ./01_repo_setup/python/repo_setup
       JSON_REPOSITORY_LIST: ./01_repo_setup/json/repository_list.json
     steps:
       - name: Checkout Repository
@@ -28,6 +27,6 @@ jobs:
           python --version
 
       - name: Setup Repositories
-        uses: ${{ env.REPO_SETUP_ACTION }}
+        uses: ./01_repo_setup/python/repo_setup
         with:
           json_repository_list: ${{ env.JSON_REPOSITORY_LIST }}
