@@ -27,6 +27,7 @@ runs:
 
     - name: Install Dependencies
       if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      shell: bash
       run: pip install -r ./01_repo_setup/python/repo_setup/requirements.txt
 
     - name: Setup Repositories
