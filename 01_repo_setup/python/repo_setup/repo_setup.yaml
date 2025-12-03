@@ -1,0 +1,11 @@
+name: 01. Respotiory Setup Python actions
+
+inputs:
+  json_repository_list:
+    description: 'Path to JSON file containing the list of repositories to set up'
+    required: true
+    default: './json/repository_list.json'
+
+runs:
+  using: 'python'
+  main: repo_setup.py
