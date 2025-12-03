@@ -8,13 +8,26 @@ on:
 jobs:
   setup_repositories:
     runs-on: ubuntu-latest
+    env:
+      REPO_SETUP_ACTION: ./01_repo_setup/python/repo_setup
+      JSON_REPOSITORY_LIST: ./01_repo_setup/json/repository_list.json
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
 
+      - name: Troubleshoot
+        shell: bash
+        run: |
+          echo "Current Working Directory:"
+          pwd
+          echo "List Files:"
+          ls -la
+          echo "Python Version:"
+          python --version
+
       - name: Setup Repositories
-        uses: ./python/repo-setup
+        uses: ${{ env.REPO_SETUP_ACTION }}
         with:
-          json_repository_list: ./json/repository_list.json
+          json_repository_list: ${{ env.JSON_REPOSITORY_LIST }}
