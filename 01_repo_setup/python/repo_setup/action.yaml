@@ -13,6 +13,22 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+
+    - name: Cache Dependencies
+      ids: cache-dependencies
+      uses: actions/cache@v4
+      with:
+        path: ./01_repo_setup/python/repo_setup/requirements.txt
+        key: ${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+
+    - name: Install Dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: pip install -r ./01_repo_setup/python/repo_setup/requirements.txt
+
     - name: Setup Repositories
       shell: bash
       run: python ./01_repo_setup/python/repo_setup/repo_setup.py --json_repository_list "${{ inputs.json_repository_list }}" --github_token "${{ inputs.github_token }}"
