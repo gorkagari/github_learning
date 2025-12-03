@@ -7,8 +7,13 @@ def main(repository_list_json):
 
 
     with open(repository_list_json, "r") as f:
-        repository_list = json.load(f)
-    print(repository_list)
+        repository_list_json = json.load(f)
+
+    repository_list = repository_list_json["repositories"]
+
+    print("Repository list:")
+    for repo in repository_list:
+        print(repo)
 
 
 if __name__ == "__main__":
