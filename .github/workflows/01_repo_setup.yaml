@@ -1,0 +1,27 @@
+name: Setup Repositories
+
+on:
+  schedule:
+    - cron: '2 0 * * *' # Runs every day at 02:00 a.m. UTC
+  workflow_dispatch:
+
+jobs:
+  setup_repositories:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Repositories
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = './json/repository_list.json';
+            const data = fs.readFileSync(path, 'utf8');
+            const repoList = JSON.parse(data).repositories;
+
+            for (const repo of repoList) {
+              console.log(`Setting up repository: ${repo}`);
+              // Add your repository setup logic here
+            }
