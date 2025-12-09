@@ -23,13 +23,12 @@ runs:
       uses: actions/cache@v4
       with:
         # Cache pip's HTTP/cache directory so repeated pip installs are faster
-        path: ~/.cache/pip
+        path: ${{ env.HOME }}/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('./01_repo_setup/python/repo_setup/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
 
     - name: Install Dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       shell: bash
       run: |
         python -m pip install --upgrade pip
