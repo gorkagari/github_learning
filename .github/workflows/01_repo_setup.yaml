@@ -8,20 +8,16 @@ on:
 jobs:
   setup_repositories:
     runs-on: ubuntu-latest
+    env:
+      JSON_REPOSITORY_LIST: ./01_repo_setup/json/repository_list.json
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
 
       - name: Setup Repositories
-        uses: actions/github-script@v6
+        uses: ./01_repo_setup/python/repo_setup
         with:
-          script: |
-            const fs = require('fs');
-            const path = './json/repository_list.json';
-            const data = fs.readFileSync(path, 'utf8');
-            const repoList = JSON.parse(data).repositories;
-
-            for (const repo of repoList) {
-              console.log(`Setting up repository: ${repo}`);
-              // Add your repository setup logic here
-            }
+          json_repository_list: ${{ env.JSON_REPOSITORY_LIST }}
+          github_token: ${{ secrets.REPO_SETUP_TEST_TOKEN  }}
